@@ -52,6 +52,8 @@ const int NPY_DTYPE = NPY_FLOAT32;
 void set_mode_cpu() { Caffe::set_mode(Caffe::CPU); }
 void set_mode_gpu() { Caffe::set_mode(Caffe::GPU); }
 
+void set_random_seed(const unsigned int seed) { Caffe::set_random_seed(seed); }
+
 // For convenience, check that input files can be opened, and raise an
 // exception that boost will send to Python if not (caffe could still crash
 // later if the input files are disturbed before they are actually used, but

@@ -288,6 +288,9 @@
     <ClCompile Include="..\..\src\caffe\layers\reshape_layer.cpp">
       <Filter>src\layers</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\caffe\layers\roi_pooling_layer.cpp">
+      <Filter>src\layers</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\caffe\layers\sigmoid_cross_entropy_loss_layer.cpp">
       <Filter>src\layers</Filter>
     </ClCompile>
@@ -298,6 +301,9 @@
       <Filter>src\layers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\caffe\layers\slice_layer.cpp">
+      <Filter>src\layers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\caffe\layers\smooth_L1_loss_layer.cpp">
       <Filter>src\layers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\caffe\layers\softmax_layer.cpp">
@@ -599,6 +605,9 @@
     <ClInclude Include="..\..\include\caffe\data_transformer.hpp">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\caffe\fast_rcnn_layers.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\include\caffe\filler.hpp">
       <Filter>include</Filter>
     </ClInclude>
@@ -706,10 +715,16 @@
     <CudaCompile Include="..\..\src\caffe\layers\mvn_layer.cu">
       <Filter>cu\layers</Filter>
     </CudaCompile>
+    <CudaCompile Include="..\..\src\caffe\layers\roi_pooling_layer.cu">
+      <Filter>cu\layers</Filter>
+    </CudaCompile>
     <CudaCompile Include="..\..\src\caffe\layers\silence_layer.cu">
       <Filter>cu\layers</Filter>
     </CudaCompile>
     <CudaCompile Include="..\..\src\caffe\layers\slice_layer.cu">
+      <Filter>cu\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\..\src\caffe\layers\smooth_L1_loss_layer.cu">
       <Filter>cu\layers</Filter>
     </CudaCompile>
     <CudaCompile Include="..\..\src\caffe\layers\split_layer.cu">
