@@ -177,6 +177,9 @@ class GradientBasedSolverTest : public MultiDeviceTest<TypeParam> {
       proto << "momentum: " << momentum << " ";
     }
     MakeTempDir(&snapshot_prefix_);
+#if defined(_MSC_VER)
+    std::replace(snapshot_prefix_.begin(), snapshot_prefix_.end(), '\\', '/');
+#endif
     proto << "snapshot_prefix: '" << snapshot_prefix_ << "/' ";
     if (snapshot) {
       proto << "snapshot: " << num_iters << " ";
@@ -185,9 +188,8 @@ class GradientBasedSolverTest : public MultiDeviceTest<TypeParam> {
     this->InitSolverFromProtoString(proto.str());
     if (from_snapshot != NULL) {
       this->solver_->Restore(from_snapshot);
-      vector<Blob<Dtype>*> empty_bottom_vec;
       for (int i = 0; i < this->solver_->iter(); ++i) {
-        this->solver_->net()->Forward(empty_bottom_vec);
+        this->solver_->net()->Forward();
       }
     }
     if (devices == 1) {
@@ -205,7 +207,7 @@ class GradientBasedSolverTest : public MultiDeviceTest<TypeParam> {
       Caffe::set_solver_count(gpus.size());
       this->sync_.reset(new P2PSync<Dtype>(
           this->solver_, NULL, this->solver_->param()));
-      this->sync_->run(gpus);
+      this->sync_->Run(gpus);
       Caffe::set_solver_count(1);
     }
     if (snapshot) {
@@ -231,8 +233,7 @@ class GradientBasedSolverTest : public MultiDeviceTest<TypeParam> {
     // Run a forward pass, and manually compute the update values from the
     // result.
     Net<Dtype>& net = *this->solver_->net();
-    vector<Blob<Dtype>*> empty_bottom_vec;
-    net.Forward(empty_bottom_vec);
+    net.Forward();
     ASSERT_TRUE(net.has_blob("data"));
     const Blob<Dtype>& data = *net.blob_by_name("data");
     ASSERT_TRUE(net.has_blob("targets"));
@@ -508,9 +509,8 @@ class GradientBasedSolverTest : public MultiDeviceTest<TypeParam> {
     for (int i = 0; i < orig_params.size(); ++i) {
       param_copies[i].reset(new Blob<Dtype>());
       const bool kReshape = true;
-      for (int copy_diff = false; copy_diff <= true; ++copy_diff) {
-        param_copies[i]->CopyFrom(*orig_params[i], copy_diff, kReshape);
-      }
+      param_copies[i]->CopyFrom(*orig_params[i], false/*copy data*/, kReshape);
+      param_copies[i]->CopyFrom(*orig_params[i], true/*copy diff*/, kReshape);
     }
 
     // Save the solver history
@@ -520,9 +520,10 @@ class GradientBasedSolverTest : public MultiDeviceTest<TypeParam> {
     for (int i = 0; i < orig_history.size(); ++i) {
       history_copies[i].reset(new Blob<Dtype>());
       const bool kReshape = true;
-      for (int copy_diff = false; copy_diff <= true; ++copy_diff) {
-        history_copies[i]->CopyFrom(*orig_history[i], copy_diff, kReshape);
-      }
+      history_copies[i]->CopyFrom(*orig_history[i],
+            false/*copy data*/, kReshape);
+      history_copies[i]->CopyFrom(*orig_history[i],
+            true/*copy diff*/, kReshape);
     }
 
     // Run the solver for num_iters iterations and snapshot.

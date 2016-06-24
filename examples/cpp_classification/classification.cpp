@@ -92,7 +92,7 @@ static bool PairCompare(const std::pair<float, int>& lhs,
 static std::vector<int> Argmax(const std::vector<float>& v, int N) {
   std::vector<std::pair<float, int> > pairs;
   for (size_t i = 0; i < v.size(); ++i)
-    pairs.push_back(std::make_pair(v[i], i));
+    pairs.push_back(std::make_pair(v[i], static_cast<int>(i)));
   std::partial_sort(pairs.begin(), pairs.begin() + N, pairs.end(), PairCompare);
 
   std::vector<int> result;
@@ -159,7 +159,7 @@ std::vector<float> Classifier::Predict(const cv::Mat& img) {
 
   Preprocess(img, &input_channels);
 
-  net_->ForwardPrefilled();
+  net_->Forward();
 
   /* Copy the output layer to a std::vector */
   Blob<float>* output_layer = net_->output_blobs()[0];
