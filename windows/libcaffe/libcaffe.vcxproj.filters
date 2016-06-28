@@ -246,6 +246,9 @@
     <ClCompile Include="..\..\src\caffe\layers\input_layer.cpp">
       <Filter>src\layers</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\caffe\layers\loc_loss_layer.cpp">
+      <Filter>src\layers</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\caffe\layers\log_layer.cpp">
       <Filter>src\layers</Filter>
     </ClCompile>
@@ -274,6 +277,9 @@
       <Filter>src\layers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\caffe\layers\power_layer.cpp">
+      <Filter>src\layers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\caffe\layers\power_file_layer.cpp">
       <Filter>src\layers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\caffe\layers\prelu_layer.cpp">
@@ -316,6 +322,12 @@
       <Filter>src\layers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\caffe\layers\spp_layer.cpp">
+      <Filter>src\layers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\caffe\layers\st_layer.cpp">
+      <Filter>src\layers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\caffe\layers\st_loss_layer.cpp">
       <Filter>src\layers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\caffe\layers\tanh_layer.cpp">
@@ -611,6 +623,9 @@
     <ClInclude Include="..\..\include\caffe\filler.hpp">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\caffe\gpu_util.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\include\caffe\internal_thread.hpp">
       <Filter>include</Filter>
     </ClInclude>
@@ -645,6 +660,18 @@
       <Filter>include\layers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\caffe\layers\scale_layer.hpp">
+      <Filter>include\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\caffe\loc_loss_layer.hpp">
+      <Filter>include\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\caffe\power_file_layer.hpp">
+      <Filter>include\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\caffe\st_layer.hpp">
+      <Filter>include\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\caffe\st_loss_layer.hpp">
       <Filter>include\layers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -685,6 +712,12 @@
     <CudaCompile Include="..\..\src\caffe\layers\dropout_layer.cu">
       <Filter>cu\layers</Filter>
     </CudaCompile>
+    <CudaCompile Include="..\..\src\caffe\layers\loc_loss_layer.cu">
+      <Filter>cu\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\..\src\caffe\layers\power_file_layer.cu">
+      <Filter>cu\layers</Filter>
+    </CudaCompile>
     <CudaCompile Include="..\..\src\caffe\layers\power_layer.cu">
       <Filter>cu\layers</Filter>
     </CudaCompile>
@@ -692,6 +725,12 @@
       <Filter>cu\layers</Filter>
     </CudaCompile>
     <CudaCompile Include="..\..\src\caffe\layers\sigmoid_layer.cu">
+      <Filter>cu\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\..\src\caffe\layers\st_layer.cu">
+      <Filter>cu\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\..\src\caffe\layers\st_loss_layer.cu">
       <Filter>cu\layers</Filter>
     </CudaCompile>
     <CudaCompile Include="..\..\src\caffe\layers\tanh_layer.cu">
