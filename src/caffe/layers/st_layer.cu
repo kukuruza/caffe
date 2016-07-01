@@ -89,7 +89,7 @@ void SpatialTransformerLayer<Dtype>::Forward_gpu(
 	const Dtype* U = bottom[0]->gpu_data();
 	const Dtype* theta = bottom[1]->gpu_data();
 	const Dtype* output_grid_data = output_grid.gpu_data();
-	
+
 	Dtype* full_theta_data = full_theta.mutable_gpu_data();
 	Dtype* input_grid_data = input_grid.mutable_gpu_data();
 	Dtype* V = top[0]->mutable_gpu_data();
@@ -115,6 +115,13 @@ void SpatialTransformerLayer<Dtype>::Forward_gpu(
 		}
 	}
 
+        std::cout << "full_theta: " << full_theta.count() << std::endl;
+        const Dtype* theta_copy = full_theta.cpu_data();
+        for (int j = 0; j != full_theta.count(); ++j) {
+            std::cout << theta_copy[j] << " " << std::flush;
+        }
+        std::cout << '\n' << std::endl;
+	
 	// compute out input_grid_data
 	for(int i = 0; i < N; ++i) {
 		caffe_gpu_gemm<Dtype>(CblasNoTrans, CblasTrans, output_H_ * output_W_, 2, 3, (Dtype)1.,
@@ -278,11 +285,12 @@ void SpatialTransformerLayer<Dtype>::Backward_gpu(const vector<Blob<Dtype>*>& to
 	caffe_gpu_gemm<Dtype>(CblasNoTrans, CblasNoTrans, full_theta.count(), 1, output_H_ * output_W_ * C, 
 			(Dtype)1., dTheta_tmp_diff, all_ones_2_data, (Dtype)0., dFull_theta);
 			
-	/*const Dtype* db_dFull_theta = full_theta.cpu_diff();
-	for(int i=0; i<full_theta.count(); ++i) {
+	const Dtype* db_dFull_theta = full_theta.cpu_diff();
+	std::cout << "db_dFull_theta" << std::endl;
+        for(int i=0; i<full_theta.count(); ++i) {
 		std::cout << db_dFull_theta[i] << " ";
 	}
-	std::cout<<std::endl;*/
+	std::cout<<std::endl;
 			
 	int k = 0;
 	const int num_threads = N;

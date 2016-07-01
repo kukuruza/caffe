@@ -23,7 +23,7 @@ void EuclideanLossLayer<Dtype>::Forward_gpu(const vector<Blob<Dtype>*>& bottom,
           diff_.mutable_gpu_data());
   }
   else {
-      LOG(FATAL) << "euclidean loss must receive one or two bottom blobs.";
+      LOG(FATAL) << "forward: must receive 1 or 2 bottom blobs; received " << bottom.size();
   }
   Dtype dot;
   caffe_gpu_dot(count, diff_.gpu_data(), diff_.gpu_data(), &dot);
@@ -34,8 +34,8 @@ void EuclideanLossLayer<Dtype>::Forward_gpu(const vector<Blob<Dtype>*>& bottom,
 template <typename Dtype>
 void EuclideanLossLayer<Dtype>::Backward_gpu(const vector<Blob<Dtype>*>& top,
     const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom) {
-    if (bottom.size() != 1 || bottom.size() != 2)
-       LOG(FATAL) << "euclidean loss must receive one or two bottom blobs.";
+    if (bottom.size() != 1 && bottom.size() != 2)
+       LOG(FATAL) << "backwards: must receive 1 or 2 bottom blobs; received " << bottom.size();
     for (int i = 0; i < bottom.size(); ++i) {
     if (propagate_down[i]) {
       const Dtype sign = (i == 0) ? 1 : -1;
